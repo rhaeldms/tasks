@@ -58,3 +58,14 @@ pipeline {
         }
     }
 }
+
+    stages {
+        stage('Build') {
+            steps {
+                sh '''
+                cd tasks-frontend
+                mvn clean package -DskipTests
+                '''
+            }
+        }
+}
