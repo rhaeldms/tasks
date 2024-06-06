@@ -65,8 +65,8 @@ pipeline {
     }
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'task-backend/target/surefire-reports/*.xml'
-            archiveArtifacts artifacts: 'task-backend/target/tasks-backend.jar', followSymlinks: false, onlyIfSuccessful: true
+            junit allowEmptyResults: true, testResults: 'tasks-backend/target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: 'tasks-backend/target/tasks-backend.jar', followSymlinks: false, onlyIfSuccessful: true
         }
     }
 }
