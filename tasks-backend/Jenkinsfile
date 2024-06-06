@@ -65,16 +65,16 @@ pipeline {
         stage('DeployFront'){
             steps {
                 sh '''
-                docker ps -q --filter "name=tasks" | grep -q . && docker stop tasks-fronted
+                docker ps -q --filter "name=tasks-frontend" | grep -q . && docker stop tasks-fronted
                 docker build -t frontend tasks-frontend/ 
-                docker run -d --rm --name tasks -e DATABASE_HOST=172.17.0.1 -e DATABASE_PORT=5433 -p 8002:8002 frontend
+                docker run -d --rm --name tasks-frontend -e BACKEND_HOST=172.17.0.1 -p 8002:8002 frontend
                 '''
             }
         }
         stage('CheckFront'){
             steps {
                 sleep(15)
-                sh """curl -I http://172.17.0.1:8001/todo"""
+                sh """curl -I http://172.17.0.1:8002/"""
             }
         }
     }
