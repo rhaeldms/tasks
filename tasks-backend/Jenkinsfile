@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-        stage ('Deploy') {
+        stage('Deploy'){
             steps {
                 sh 'docker run -d --rm --name tasks -e DATABASE_HOST=172.17.0.1 -p 8001:8001 backend'
             }
@@ -50,10 +50,12 @@ pipeline {
                 sh """curl -I http://172.17.0.1:8001/todo"""
             }
         }
-        stage('Build2') {
-            steps {
-                sh 'cd tasks-frontend'
-                                
+        stage('BuildFront'){
+           steps {
+                sh '''
+                cd tasks-frontend
+                mvn clean package -DskipTests
+                '''                                
             }
         }
     }
