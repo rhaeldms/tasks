@@ -52,10 +52,8 @@ pipeline {
         }
         stage('Build2') {
             steps {
-                sh '''
-                cd tasks-frontend
-                mvn clean package -DskipTests
-                '''
+                sh 'cd tasks-frontend'
+                                
             }
         }
     }
